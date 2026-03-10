@@ -36,5 +36,6 @@ git push -u origin main
 
 ## Notes
 
+- The site uses only local HTML, CSS, fonts, images, and favicon assets for page rendering.
 - The stylesheet already uses relative paths, so it works from a GitHub Pages project subpath.
-- The page uses externally hosted fonts and images. Those assets must remain available for the published site to render exactly as it does locally.
+- The Vimeo links remain outbound links, but the page no longer depends on third-party hosts for fonts or images.
