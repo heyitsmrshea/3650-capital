@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3650 Capital | Editorial Concept</title>
+    <title>3650 Capital</title>
     <meta
       name="description"
-      content="Alternative editorial concept for 3650 Capital using the existing homepage content."
+      content="Commercial real estate credit solutions across the property life cycle."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,7 +19,7 @@
   <body>
     <div class="page-frame">
       <header class="site-header">
-        <a class="brand" href="./index.html" aria-label="3650 Capital editorial concept home">
+        <a class="brand" href="./index.html" aria-label="3650 Capital home">
           <img
             src="https://3650capital.com/wp-content/uploads/2024/10/3650Capital-Logo.png"
             alt="3650 Capital"
@@ -34,6 +34,22 @@
           <a href="./contact.html">Contact</a>
         </nav>
       </header>
+
+      <section class="award-rail" aria-label="Recent recognition">
+        <p class="section-kicker">Recognition</p>
+        <p class="award-copy">
+          <strong>PERE Credit named 3650 Capital its 2025 Alternative Lender of the Year</strong>
+          in the sub-$5B real estate AUM category.
+        </p>
+        <a
+          class="text-link award-link"
+          href="https://www.businesswire.com/news/home/20260226509216/en/3650-Capital-Wins-PERE-Credit-Alternative-Lender-of-the-Year-Award"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Read announcement
+        </a>
+      </section>
 
       <main>
         <section class="hero">
@@ -51,8 +67,8 @@
               </h1>
               <p class="lede">
                 3650 originates, structures, services, and safeguards commercial real estate loans
-                across the full property life cycle. The platform stays visible from the first
-                conversation through servicing continuity after close.
+                across the property life cycle, with origination, servicing, and asset management
+                carried through one platform.
               </p>
             </div>
 
@@ -141,21 +157,25 @@
               the driver for customer-centric outcomes that support borrowers and sponsors as they
               grow cash flow and the value of their properties.
             </p>
-            <a
+            <button
+              type="button"
               class="text-link"
-              href="https://vimeo.com/879025491?fl=pl&fe=cm"
-              target="_blank"
-              rel="noreferrer"
+              data-video-open
+              data-video-id="879025491"
+              aria-haspopup="dialog"
+              aria-controls="founders-video-modal"
             >
               Watch founder video
-            </a>
+            </button>
           </div>
-          <a
+          <button
+            type="button"
             class="feature-media"
-            href="https://vimeo.com/879025491?fl=pl&fe=cm"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Watch the 3650 Capital founders video on Vimeo"
+            data-video-open
+            data-video-id="879025491"
+            aria-haspopup="dialog"
+            aria-controls="founders-video-modal"
+            aria-label="Play the 3650 Capital founders video"
           >
             <span class="feature-frame">
               <img
@@ -164,14 +184,14 @@
               />
             </span>
             <span class="play-mark">Play</span>
-          </a>
+          </button>
         </section>
 
         <section class="proof-section" id="proof">
           <div class="proof-stage">
             <div class="proof-head">
               <p class="section-kicker">Platform at a glance</p>
-              <h2>Selected transactions and credit solutions.</h2>
+              <h2>Transactions and credit solutions.</h2>
             </div>
 
             <article class="proof-case">
@@ -265,15 +285,15 @@
           <article class="news-feature">
             <figure>
               <img
-                src="https://3650capital.com/wp-content/uploads/2021/10/Gateway-at-Wynwood.png"
+                src="https://3650capital.com/wp-content/uploads/2020/01/Gateway-at-Wynwood-e1578945268648.jpg"
                 alt="Gateway at Wynwood development image"
               />
             </figure>
             <div class="news-feature-copy">
               <p class="item-label">News archive</p>
-              <h3><a href="./transactions.html">See how recent activity shows up in market coverage.</a></h3>
+              <h3><a href="./transactions.html">Read the latest 3650 news.</a></h3>
               <p>
-                Press coverage and company updates tied to recent transactions and platform activity.
+                Recent coverage tied to financings, dispositions, and market activity.
               </p>
             </div>
           </article>
@@ -325,6 +345,29 @@
           </div>
         </section>
       </main>
+      <div class="video-modal" id="founders-video-modal" aria-hidden="true">
+        <div class="video-modal-backdrop" data-video-close></div>
+        <div class="video-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="founders-video-title">
+          <div class="video-modal-head">
+            <div>
+              <p class="section-kicker">Founders video</p>
+              <h2 id="founders-video-title">A better experience.</h2>
+            </div>
+            <button type="button" class="video-modal-close" data-video-close aria-label="Close video">
+              Close
+            </button>
+          </div>
+          <div class="video-modal-frame">
+            <iframe
+              title="3650 Capital founders video"
+              data-video-embed
+              src=""
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
       <footer class="site-footer">
         <div class="site-footer-grid">
           <div class="site-footer-block site-footer-mark">

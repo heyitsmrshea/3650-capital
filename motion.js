@@ -46,21 +46,16 @@
 	          <p class="item-label">${member.role}</p>
 	          <h3>${member.name}</h3>
 	          <div class="leadership-stage-meta">
-	            <span class="leadership-pill ${member.bioUrl ? "is-published" : ""}">
-	              ${member.bioUrl ? "Published bio" : "Roster profile"}
-	            </span>
-	            ${lockedMember === member.name ? '<span class="leadership-pill is-active">Selected</span>' : ""}
-	            ${featuredNames.has(member.name) ? '<span class="leadership-pill">Platform lead</span>' : ""}
-	            <span class="leadership-pill">${rosterCount} total profiles</span>
-	          </div>
+            <span class="leadership-pill ${member.bio.length ? "is-published" : ""}">
+              ${member.bio.length ? "Published bio" : "Roster profile"}
+            </span>
+            ${lockedMember === member.name ? '<span class="leadership-pill is-active">Selected</span>' : ""}
+            ${featuredNames.has(member.name) ? '<span class="leadership-pill">Platform lead</span>' : ""}
+            <span class="leadership-pill">${rosterCount} total profiles</span>
+          </div>
           <div class="leadership-stage-bio">
             ${bio.map((paragraph) => `<p>${paragraph}</p>`).join("")}
           </div>
-          ${
-            member.bioUrl
-              ? `<a class="leadership-stage-link" href="${member.bioUrl}" target="_blank" rel="noreferrer">Read published bio</a>`
-              : ""
-          }
         </div>
       `;
 
@@ -84,7 +79,7 @@
         <span class="directory-copy">
           <span class="item-label">${member.role}</span>
           <strong>${member.name}</strong>
-          <span class="directory-note">${member.bioUrl ? "Expand bio" : "Roster profile"}</span>
+          <span class="directory-note">${member.bio.length ? "View bio" : "Roster profile"}</span>
         </span>
       `;
 
@@ -122,7 +117,53 @@
 
   const leadershipTargets = initLeadershipExplorer();
 
+  function initVideoModal() {
+    const modal = document.querySelector(".video-modal");
+    const frame = modal?.querySelector("[data-video-embed]");
+    const openers = [...document.querySelectorAll("[data-video-open]")];
+    const closers = [...document.querySelectorAll("[data-video-close]")];
+    if (!modal || !frame || !openers.length) return;
+
+    let lastTrigger = null;
+
+    const close = () => {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("video-modal-open");
+      frame.setAttribute("src", "");
+      lastTrigger?.focus();
+    };
+
+    const open = (trigger) => {
+      const videoId = trigger.getAttribute("data-video-id");
+      if (!videoId) return;
+      lastTrigger = trigger;
+      frame.setAttribute(
+        "src",
+        `https://player.vimeo.com/video/${videoId}?autoplay=1&title=0&byline=0&portrait=0&dnt=1`
+      );
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("video-modal-open");
+    };
+
+    openers.forEach((opener) => {
+      opener.addEventListener("click", () => open(opener));
+    });
+
+    closers.forEach((closer) => {
+      closer.addEventListener("click", close);
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("is-open")) close();
+    });
+  }
+
+  initVideoModal();
+
   const revealSelectors = [
+    ".award-rail",
     ".hero-intro",
     ".hero-copy",
     ".hero-visual",
@@ -188,12 +229,12 @@
     introLines.forEach((line, index) => {
       line.animate(
         [
-          { opacity: 0.001, transform: "translate3d(0, 34px, 0)" },
+          { opacity: 0.001, transform: "translate3d(0, 42px, 0)" },
           { opacity: 1, transform: "translate3d(0, 0, 0)" }
         ],
         {
-          duration: 950,
-          delay: 120 + index * 90,
+          duration: 1320,
+          delay: 180 + index * 160,
           easing,
           fill: "both"
         }
