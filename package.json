@@ -1,0 +1,17 @@
+{
+  "name": "3650-ideas-loop",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "design:prompt": "node ./tools/loop/generate-prompt.mjs",
+    "design:capture": "node ./tools/loop/capture.mjs",
+    "design:checks": "node ./tools/loop/checks.mjs",
+    "design:critic": "node ./tools/loop/critic.mjs",
+    "design:apply": "node ./tools/loop/apply.mjs",
+    "design:loop": "node ./tools/loop/run-loop.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.58.2"
+  }
+}

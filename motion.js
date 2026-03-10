@@ -15,49 +15,30 @@
     const grid = document.getElementById("leadership-directory-grid");
     if (!Array.isArray(members) || !stage || !grid) return [];
 
-    const placeholderBio = (member) => [
-      `${member.name} serves as ${member.role} at 3650 Capital. A longer public biography is not currently available on the site.`
-    ];
-
-    const featuredNames = new Set([
-      "Toby Cobb",
-      "Justin Kennedy",
-      "Jonathan Roth",
-      "Peter LaPointe",
-      "Malay Bansal",
-      "Ken Dickey",
-      "Andrew Parower",
-      "Daniel Antonelli",
-      "Michael Fleischer",
-      "Mark Jefferis"
-    ]);
+    const placeholderBio = (member) => [`${member.name} serves as ${member.role} at 3650 Capital.`];
 
     let activeButton = null;
     let lockedMember = null;
 
-	    const renderStage = (member) => {
-	      const bio = member.bio.length ? member.bio : placeholderBio(member);
-	      const rosterCount = members.length;
-	      stage.innerHTML = `
-	        <figure class="leadership-stage-media">
-	          <img src="${member.image}" alt="${member.name}" />
-	        </figure>
-	        <div class="leadership-stage-copy">
-	          <p class="item-label">${member.role}</p>
-	          <h3>${member.name}</h3>
-	          <div class="leadership-stage-meta">
-            <span class="leadership-pill ${member.bio.length ? "is-published" : ""}">
-              ${member.bio.length ? "Published bio" : "Roster profile"}
-            </span>
-            ${lockedMember === member.name ? '<span class="leadership-pill is-active">Selected</span>' : ""}
-            ${featuredNames.has(member.name) ? '<span class="leadership-pill">Platform lead</span>' : ""}
-            <span class="leadership-pill">${rosterCount} total profiles</span>
-          </div>
+    const renderStage = (member) => {
+      const bio = member.bio.length ? member.bio : placeholderBio(member);
+      stage.innerHTML = `
+        <figure class="leadership-stage-media">
+          <img src="${member.image}" alt="${member.name}" />
+        </figure>
+        <div class="leadership-stage-copy">
+          <p class="item-label">${member.role}</p>
+          <h3>${member.name}</h3>
           <div class="leadership-stage-bio">
             ${bio.map((paragraph) => `<p>${paragraph}</p>`).join("")}
           </div>
         </div>
       `;
+
+      const stageMedia = stage.querySelector(".leadership-stage-media");
+      const stageRole = stage.querySelector(".item-label");
+      const stageName = stage.querySelector("h3");
+      const stageBio = stage.querySelector(".leadership-stage-bio");
 
       stage.animate(
         [
@@ -65,6 +46,38 @@
           { opacity: 1, transform: "translate3d(0, 0, 0)" }
         ],
         { duration: 420, easing, fill: "both" }
+      );
+
+      stageMedia?.animate(
+        [
+          { opacity: 0.001, transform: "translate3d(0, 20px, 0) scale(0.985)" },
+          { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" }
+        ],
+        { duration: 520, easing, fill: "both" }
+      );
+
+      stageRole?.animate(
+        [
+          { opacity: 0.001, transform: "translate3d(-18px, 0, 0)" },
+          { opacity: 1, transform: "translate3d(0, 0, 0)" }
+        ],
+        { duration: 520, delay: 80, easing, fill: "both" }
+      );
+
+      stageName?.animate(
+        [
+          { opacity: 0.001, transform: "translate3d(-26px, 0, 0)" },
+          { opacity: 1, transform: "translate3d(0, 0, 0)" }
+        ],
+        { duration: 620, delay: 120, easing, fill: "both" }
+      );
+
+      stageBio?.animate(
+        [
+          { opacity: 0.001, transform: "translate3d(0, 18px, 0)" },
+          { opacity: 1, transform: "translate3d(0, 0, 0)" }
+        ],
+        { duration: 560, delay: 180, easing, fill: "both" }
       );
     };
 
@@ -79,7 +92,6 @@
         <span class="directory-copy">
           <span class="item-label">${member.role}</span>
           <strong>${member.name}</strong>
-          <span class="directory-note">${member.bio.length ? "View bio" : "Roster profile"}</span>
         </span>
       `;
 
@@ -161,6 +173,49 @@
   }
 
   initVideoModal();
+
+  function initTransactionDetails() {
+    const tiles = [...document.querySelectorAll(".transaction-tile")];
+    if (!tiles.length) return;
+
+    tiles.forEach((tile) => {
+      const toggle = tile.querySelector(".transaction-detail-toggle");
+      const panel = tile.querySelector(".transaction-detail-panel");
+      if (!toggle || !panel) return;
+
+      const setOpen = (next) => {
+        tile.classList.toggle("is-open", next);
+        panel.setAttribute("aria-hidden", next ? "false" : "true");
+      };
+
+      toggle.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const next = !tile.classList.contains("is-open");
+        tiles.forEach((other) => {
+          if (other !== tile) {
+            other.classList.remove("is-open");
+            other.querySelector(".transaction-detail-panel")?.setAttribute("aria-hidden", "true");
+          }
+        });
+        setOpen(next);
+      });
+
+      tile.addEventListener("mouseleave", () => {
+        if (!tile.matches(".is-open")) setOpen(false);
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      if (event.target.closest(".transaction-tile")) return;
+      tiles.forEach((tile) => {
+        tile.classList.remove("is-open");
+        tile.querySelector(".transaction-detail-panel")?.setAttribute("aria-hidden", "true");
+      });
+    });
+  }
+
+  initTransactionDetails();
 
   const revealSelectors = [
     ".award-rail",
