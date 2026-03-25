@@ -472,4 +472,56 @@
 
     start();
   });
+
+  // === SCROLL PROGRESS BAR ===
+  const progressBar = document.createElement("div");
+  progressBar.className = "scroll-progress";
+  const progressFill = document.createElement("div");
+  progressFill.className = "scroll-progress-fill";
+  progressBar.appendChild(progressFill);
+  document.body.insertBefore(progressBar, document.body.firstChild);
+
+  // === SCROLL-DRIVEN: progress + header compact + hero parallax ===
+  const heroVisualFrame = document.querySelector(".hero-visual");
+  let rafPending = false;
+
+  const handleScroll = () => {
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(() => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+      progressFill.style.transform = `scaleX(${Math.min(progress, 1)})`;
+
+      if (header) header.classList.toggle("is-scrolled", scrollTop > 80);
+
+      if (heroVisualFrame) {
+        const parallax = Math.min(scrollTop * 0.16, 72);
+        heroVisualFrame.style.setProperty("--hero-parallax", `${parallax}px`);
+      }
+
+      rafPending = false;
+    });
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+
+  // === CARD SPOTLIGHT ===
+  if (window.matchMedia("(hover: hover)").matches) {
+    const spotlightCards = [
+      ...document.querySelectorAll(
+        ".sub-card, .metric-card, .founder-card, .office-card, .leadership-directory-card"
+      )
+    ];
+    spotlightCards.forEach((card) => {
+      card.addEventListener("pointermove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty("--spotlight-x", `${x}%`);
+        card.style.setProperty("--spotlight-y", `${y}%`);
+      });
+    });
+  }
 })();

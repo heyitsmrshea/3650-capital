@@ -2998,3 +2998,193 @@ body.video-modal-open {
     font-size: clamp(2.4rem, 3vw, 3.2rem);
   }
 }
+
+/* =============================================================================
+   UPGRADE: Enhanced Interactions, Animation & Visual Polish
+   ============================================================================= */
+
+/* --- Scroll progress bar --------------------------------------------------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 300;
+  width: 100%;
+  height: 2px;
+  pointer-events: none;
+}
+
+.scroll-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--signal));
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+}
+
+/* --- Header compact state on scroll --------------------------------------- */
+.site-header {
+  transition:
+    padding 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 360ms ease,
+    background-color 360ms ease;
+}
+
+.site-header.is-scrolled {
+  padding-top: 12px;
+  padding-bottom: 10px;
+  box-shadow: 0 1px 0 rgba(19, 19, 19, 0.14), 0 6px 28px rgba(19, 19, 19, 0.08);
+  background: rgba(238, 230, 215, 0.97);
+}
+
+/* --- Hero visual overflow clip for parallax ------------------------------- */
+.hero-visual {
+  overflow: hidden;
+}
+
+.hero-visual img {
+  transform: translate3d(var(--mx, 0px), calc(var(--my, 0px) + var(--hero-parallax, 0px)), 0) scale(calc(1.12 * var(--media-scale, 1)));
+}
+
+/* --- Card spotlight cursor effect ----------------------------------------- */
+.sub-card,
+.metric-card,
+.office-card,
+.founder-card,
+.leadership-directory-card {
+  --spotlight-x: 50%;
+  --spotlight-y: 50%;
+}
+
+.motion-enabled .sub-card:hover,
+.motion-enabled .metric-card:hover,
+.motion-enabled .founder-card:hover,
+.motion-enabled .office-card:hover {
+  background-image: radial-gradient(
+    circle 220px at var(--spotlight-x) var(--spotlight-y),
+    rgba(255, 255, 255, 0.3),
+    transparent 72%
+  );
+}
+
+.motion-enabled .leadership-directory-card:hover,
+.motion-enabled .leadership-directory-card.is-active {
+  background-image: radial-gradient(
+    circle 180px at var(--spotlight-x) var(--spotlight-y),
+    rgba(255, 255, 255, 0.26),
+    transparent 68%
+  );
+}
+
+/* --- Enhanced card lift on hover ----------------------------------------- */
+.motion-enabled .sub-card:hover,
+.motion-enabled .metric-card:hover {
+  transform: translate3d(0, -5px, 0);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.1);
+}
+
+.motion-enabled .founder-card:hover {
+  transform: translate3d(0, -5px, 0);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Transaction tile: cinematic hover ------------------------------------ */
+.motion-enabled .transaction-tile {
+  transition:
+    transform 540ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 540ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.motion-enabled .transaction-tile:hover {
+  transform: translate3d(0, -6px, 0) scale(1.008);
+  box-shadow: 0 26px 60px rgba(19, 19, 19, 0.26);
+}
+
+/* --- Extended text-link arrow --------------------------------------------- */
+.motion-enabled .text-link:hover::after {
+  width: 96px;
+}
+
+/* --- News item: directional hover ----------------------------------------- */
+.motion-enabled .news-item:hover {
+  transform: translate3d(6px, -2px, 0);
+}
+
+/* --- News feature link: smooth underline draw ----------------------------- */
+.motion-enabled .news-feature-copy h3 a {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  text-decoration: none;
+}
+
+.motion-enabled .news-feature-copy h3 a:hover,
+.motion-enabled .news-feature-copy h3 a:focus-visible {
+  background-size: 100% 1px;
+  text-decoration: none;
+}
+
+/* --- Statement lead: watermark number ------------------------------------- */
+.statement-lead {
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes subtlePulse {
+  0%, 100% { opacity: 0.07; }
+  50%       { opacity: 0.16; }
+}
+
+.statement-lead::before {
+  content: "36";
+  position: absolute;
+  right: 14px;
+  bottom: -18px;
+  font-family: "Newsreader", serif;
+  font-size: 9rem;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(231, 222, 204, 1);
+  letter-spacing: -0.06em;
+  pointer-events: none;
+  animation: subtlePulse 8s ease-in-out infinite;
+}
+
+/* --- Hero copy: glass clarity --------------------------------------------- */
+.motion-enabled .hero-copy {
+  backdrop-filter: blur(5px);
+}
+
+/* --- Founder card: image zoom on hover ------------------------------------ */
+.founder-card-media img {
+  transition:
+    transform 880ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 400ms ease;
+}
+
+.motion-enabled .founder-card:hover .founder-card-media img {
+  transform: scale(1.06);
+  filter: saturate(1.05) contrast(1.02);
+}
+
+/* --- Enhanced focus ring -------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* --- Office card link arrow extend ---------------------------------------- */
+.motion-enabled .office-card a:hover::after,
+.motion-enabled .contact-channel-card h3 a:hover::after {
+  width: 52px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress-fill,
+  .statement-lead::before {
+    animation: none;
+    transition: none;
+  }
+}
