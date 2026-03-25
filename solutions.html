@@ -4,9 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3650 Capital | Solutions</title>
-    <meta name="description" content="Products and services for 3650 Capital." />
+    <meta name="description" content="3650 Capital offers RECS, transitional lending, stable cash flow lending, and special situations — all supported by in-house servicing and asset management." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="3650 Capital | Short-term capital. Long-term solutions." />
+    <meta property="og:description" content="3650 Capital offers RECS, transitional lending, stable cash flow lending, and special situations — all supported by in-house servicing and asset management." />
+    <meta property="og:url" content="https://3650capital.com/solutions" />
+    <meta property="og:image" content="https://3650capital.com/wp-content/uploads/2020/12/Oasis-Pointe-Rendering-1.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://3650capital.com/solutions" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap"
       rel="stylesheet"
@@ -15,15 +27,16 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <div class="page-frame">
       <header class="site-header">
         <a class="brand" href="./index.html" aria-label="3650 Capital home">
           <img
-            src="./assets/favicon-3650.png"
+            src="./assets/media/3650Capital-Logo.png"
             alt="3650 Capital"
           />
         </a>
-        <nav class="site-nav" aria-label="Primary">
+        <nav class="site-nav" aria-label="Primary" id="primary-nav">
           <a href="./index.html">Home</a>
           <a href="./firm.html">Firm</a>
           <a class="is-active" href="./solutions.html">Solutions</a>
@@ -31,9 +44,18 @@
           <a href="./leadership.html">Leadership</a>
           <a href="./contact.html">Contact</a>
         </nav>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-controls="primary-nav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span></span><span></span><span></span>
+        </button>
       </header>
 
-      <main class="subpage-main">
+      <main class="subpage-main" id="main-content">
         <section class="sub-hero">
           <div class="sub-hero-copy">
             <p class="section-kicker">Products &amp; Services</p>
@@ -273,6 +295,9 @@
           </div>
         </section>
       </main>
+      <aside class="site-footnote">
+        <p>Target investment parameters shown above are indicative and subject to change based on market conditions, asset type, sponsor profile, and transaction structure. All financing is subject to underwriting, credit approval, and applicable regulatory requirements. Nothing on this page constitutes a commitment to lend. Contact 3650 Capital directly to discuss a specific financing opportunity.</p>
+      </aside>
       <footer class="site-footer">
         <div class="site-footer-grid">
           <div class="site-footer-block site-footer-mark">

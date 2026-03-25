@@ -1,4 +1,24 @@
 (() => {
+  // Mobile nav toggle
+  const navToggle = document.querySelector(".nav-toggle");
+  const header = document.querySelector(".site-header");
+  const nav = document.getElementById("primary-nav");
+  if (navToggle && header && nav) {
+    navToggle.addEventListener("click", () => {
+      const isOpen = header.classList.toggle("nav-open");
+      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+    // Close nav when a link is clicked on mobile
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 720) {
+          header.classList.remove("nav-open");
+          navToggle.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+  }
+
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion) {
     document.documentElement.classList.add("reduce-motion");
@@ -217,6 +237,62 @@
 
   initTransactionDetails();
 
+  // Contact form validation
+  const form = document.getElementById("inquiry-form");
+  const formSuccess = document.getElementById("form-success");
+  if (form && formSuccess) {
+    const showError = (input, label) => {
+      input.classList.add("is-invalid");
+      label.classList.add("has-error");
+      let err = label.querySelector(".field-error");
+      if (!err) {
+        err = document.createElement("span");
+        err.className = "field-error";
+        err.setAttribute("role", "alert");
+        label.appendChild(err);
+      }
+      err.textContent = input.type === "email"
+        ? "Please enter a valid email address."
+        : "This field is required.";
+    };
+
+    const clearError = (input, label) => {
+      input.classList.remove("is-invalid");
+      label.classList.remove("has-error");
+      label.querySelector(".field-error")?.remove();
+    };
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      let valid = true;
+
+      form.querySelectorAll("[required]").forEach((input) => {
+        const label = input.closest("label");
+        const empty = !input.value.trim();
+        const badEmail = input.type === "email" && input.value && !input.value.includes("@");
+        if (empty || badEmail) {
+          showError(input, label);
+          valid = false;
+        } else {
+          clearError(input, label);
+        }
+      });
+
+      if (valid) {
+        form.style.display = "none";
+        formSuccess.classList.add("is-visible");
+        formSuccess.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    });
+
+    form.querySelectorAll("[required]").forEach((input) => {
+      input.addEventListener("input", () => {
+        const label = input.closest("label");
+        if (input.value.trim()) clearError(input, label);
+      });
+    });
+  }
+
   const revealSelectors = [
     ".award-rail",
     ".hero-intro",
@@ -374,6 +450,24 @@
     slider.addEventListener("pointerleave", () => {
       stop();
       start();
+    });
+
+    dots.forEach((dot, dotIndex) => {
+      dot.setAttribute("role", "button");
+      dot.setAttribute("tabindex", "0");
+      dot.setAttribute("aria-label", `Show transaction slide ${dotIndex + 1}`);
+      dot.addEventListener("click", () => {
+        stop();
+        setActive(dotIndex);
+        start();
+      });
+      dot.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        stop();
+        setActive(dotIndex);
+        start();
+      });
     });
 
     start();
