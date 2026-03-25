@@ -331,13 +331,45 @@
     ])
   ];
 
-  let revealCount = 0;
+  // Per-grid stagger: assign data-stagger-index per child within each grid parent
+  document.querySelectorAll(
+    ".sub-grid, .sub-grid-3, .metrics-grid, .metrics-grid-wide, .founder-strip, " +
+    ".sub-grid-ethos, .sub-grid-solutions, .sub-grid-leadership, .sub-grid-leadership-wide, " +
+    ".leadership-directory-grid, .contact-directory-grid, .sub-band"
+  ).forEach((grid) => {
+    [...grid.children].forEach((child, i) => {
+      child.dataset.staggerIndex = String(i);
+    });
+  });
 
-  function animateElement(el, index = 0) {
+  // Clip-path wipe targets — applied to image-frame containers, not to imgs
+  const clipPathClasses = new Set([
+    "sub-hero-media", "feature-media", "leadership-photo-card",
+    "case-image", "metric-photo", "office-photo"
+  ]);
+
+  function animateElement(el, fallbackIndex = 0) {
     if (el.dataset.motionDone === "true") return;
     el.dataset.motionDone = "true";
 
-    const delay = Math.min(index * 38, 360);
+    const idx = el.dataset.staggerIndex !== undefined
+      ? Number(el.dataset.staggerIndex)
+      : fallbackIndex;
+    const delay = Math.min(idx * 70, 420);
+
+    const isClipTarget = [...clipPathClasses].some((cls) => el.classList.contains(cls));
+
+    if (isClipTarget) {
+      el.animate(
+        [
+          { clipPath: "inset(0 100% 0 0)", opacity: 0.001 },
+          { clipPath: "inset(0 0% 0 0)", opacity: 1 }
+        ],
+        { duration: 860, delay, easing, fill: "both" }
+      );
+      return;
+    }
+
     el.animate(
       [
         { opacity: 0.001, transform: "translate3d(0, 28px, 0) scale(0.985)", filter: "blur(3px)" },
@@ -352,23 +384,32 @@
     );
   }
 
+  let revealCount = 0;
+
   requestAnimationFrame(() => {
     document.body.classList.add("is-ready");
     document.body.classList.add("motion-ready");
 
     const introLines = [...document.querySelectorAll(".hero-title span")];
-    introLines.forEach((line, index) => {
-      line.animate(
+    let wordIdx = 0;
+    introLines.forEach((line) => {
+      const words = line.textContent.trim().split(/\s+/);
+      line.textContent = "";
+      words.forEach((word) => {
+        const span = document.createElement("span");
+        span.className = "hero-word";
+        span.textContent = word;
+        line.appendChild(span);
+        line.appendChild(document.createTextNode(" "));
+      });
+    });
+    document.querySelectorAll(".hero-title .hero-word").forEach((wordEl) => {
+      wordEl.animate(
         [
-          { opacity: 0.001, transform: "translate3d(0, 42px, 0)" },
-          { opacity: 1, transform: "translate3d(0, 0, 0)" }
+          { clipPath: "inset(0 0 0 100%)" },
+          { clipPath: "inset(0 0 0 0%)" }
         ],
-        {
-          duration: 1320,
-          delay: 180 + index * 160,
-          easing,
-          fill: "both"
-        }
+        { duration: 880, delay: 180 + wordIdx++ * 80, easing, fill: "both" }
       );
     });
 
@@ -524,4 +565,53 @@
       });
     });
   }
+
+  // === NUMBER COUNTERS ===
+  function initCounters() {
+    const DURATION = 1600;
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+
+    document.querySelectorAll(".tag-strip li, .transaction-stage-meta strong").forEach((el) => {
+      const raw = el.textContent.trim();
+      // Match: optional $ prefix, integer digits with optional commas, optional trailing + or %
+      const m = raw.match(/^(\$?)(\d[\d,]*)(\+|%)?$/);
+      if (!m) return;
+      const [, prefix, numStr, suffix = ""] = m;
+      const target = parseInt(numStr.replace(/,/g, ""), 10);
+      if (!target || target < 2) return;
+      el.dataset.counterTo = String(target);
+      el.dataset.counterPrefix = prefix;
+      el.dataset.counterSuffix = suffix;
+    });
+
+    const run = (el) => {
+      const to = Number(el.dataset.counterTo);
+      const prefix = el.dataset.counterPrefix;
+      const suffix = el.dataset.counterSuffix;
+      const start = performance.now();
+      const step = (now) => {
+        const t = Math.min((now - start) / DURATION, 1);
+        const val = Math.round(to * ease(t));
+        el.textContent = `${prefix}${val.toLocaleString()}${suffix}`;
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    const counterObs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(({ isIntersecting, target }) => {
+          if (!isIntersecting || target.dataset.counterDone === "true") return;
+          target.dataset.counterDone = "true";
+          run(target);
+          counterObs.unobserve(target);
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    document.querySelectorAll("[data-counter-to]").forEach((el) => counterObs.observe(el));
+  }
+
+  initCounters();
 })();
