@@ -287,7 +287,7 @@ h3 {
   margin: 0;
   font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.19em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -1091,9 +1091,9 @@ body.video-modal-open {
 .motion-enabled .news-item:hover,
 .motion-enabled .hero-facts > div:hover,
 .motion-enabled .hero-stance:hover {
-  transform: translate3d(0, -6px, 0);
+  transform: translate3d(0, -3px, 0);
   border-color: rgba(19, 19, 19, 0.28);
-  box-shadow: 0 14px 28px rgba(19, 19, 19, 0.06);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
   background-color: rgba(255, 255, 255, 0.12);
 }
 
@@ -2335,6 +2335,15 @@ body.video-modal-open {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
+  transition: transform 160ms ease, background-color 200ms ease;
+}
+
+.inquiry-form button:hover {
+  background-color: #222;
+}
+
+.inquiry-form button:active {
+  transform: scale(0.97);
 }
 
 .contact-channel-grid {
@@ -2600,6 +2609,7 @@ body.video-modal-open {
 
 .transaction-tile img {
   height: 100%;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   object-position: center center;
   transform: translate3d(var(--mx, 0px), var(--my, 0px), 0) scale(var(--media-scale, 1));
@@ -2980,5 +2990,11 @@ body.video-modal-open {
 
   .leadership-main .sub-hero {
     gap: 14px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-copy h1 {
+    font-size: clamp(2.4rem, 3vw, 3.2rem);
   }
 }
