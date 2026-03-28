@@ -2661,6 +2661,8 @@ body.video-modal-open {
 }
 
 .transaction-detail-toggle {
+  position: relative;
+  z-index: 3;
   margin-top: 12px;
   padding: 0;
   border: 0;
@@ -2835,7 +2837,6 @@ body.video-modal-open {
   }
 
   .site-nav {
-    display: grid;
     grid-template-columns: repeat(3, max-content);
     justify-content: start;
     gap: 10px 18px;
