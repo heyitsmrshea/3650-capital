@@ -2715,6 +2715,7 @@ body.video-modal-open {
   opacity: 1;
   transform: translate3d(0, 0, 0);
   pointer-events: auto;
+  z-index: 4;
 }
 
 .transaction-tile:hover .transaction-detail-toggle::after,
