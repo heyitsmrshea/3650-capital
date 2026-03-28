@@ -3262,6 +3262,55 @@ body::after {
   transform: translate3d(0, -6px, 0);
 }
 
+/* --- Page-level CTA band -------------------------------------------------- */
+.page-cta {
+  margin-top: 64px;
+  padding: 52px 48px 56px;
+  background: linear-gradient(155deg, rgba(19, 63, 55, 0.97) 0%, rgba(19, 63, 55, 0.86) 100%);
+  color: #eadfcb;
+  position: relative;
+}
+
+.page-cta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(231, 222, 204, 0.18);
+}
+
+.page-cta .section-kicker {
+  color: rgba(231, 222, 204, 0.58);
+}
+
+.page-cta h2 {
+  max-width: 560px;
+  color: #f2e8d6 !important;
+  font-size: clamp(1.7rem, 2.9vw, 2.6rem);
+  line-height: 1.06;
+  margin: 6px 0 0;
+}
+
+.page-cta p {
+  max-width: 440px;
+  margin: 16px 0 0;
+  color: rgba(234, 223, 203, 0.7);
+  line-height: 1.62;
+}
+
+.page-cta .text-link {
+  margin-top: 26px;
+  color: #f2e8d6;
+}
+
+@media (max-width: 680px) {
+  .page-cta {
+    padding: 40px 28px 44px;
+  }
+}
+
 /* --- Reduced-motion: v2 additions ----------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   body::after {
