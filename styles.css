@@ -1918,6 +1918,8 @@ body.video-modal-open {
 .metrics-grid-wide .metric-photo {
   grid-column: span 3;
   min-height: 320px;
+  max-height: 480px;
+  height: 480px;
 }
 
 .metrics-grid-transaction {
@@ -1964,6 +1966,7 @@ body.video-modal-open {
 }
 
 .metric-photo img {
+  width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 36%;
