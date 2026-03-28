@@ -1038,7 +1038,7 @@ body.video-modal-open {
   grid-template-columns: 180px minmax(0, 1.45fr) minmax(0, 1fr);
   gap: 10px 24px;
   align-items: start;
-  padding: 14px 0;
+  padding: 10px 0;
   border-top: 1px solid var(--line);
   color: inherit;
   text-decoration: none;
@@ -1048,9 +1048,18 @@ body.video-modal-open {
   border-top: 0;
 }
 
+.news-item:empty {
+  display: none;
+}
+
+.news-item > p:first-child:empty {
+  display: none;
+}
+
 .news-item h3 {
   font-size: clamp(1.04rem, 1.08vw, 1.22rem);
   line-height: 1.08;
+  margin: 0;
 }
 
 .news-item p {

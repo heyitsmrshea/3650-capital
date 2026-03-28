@@ -355,7 +355,7 @@
     const idx = el.dataset.staggerIndex !== undefined
       ? Number(el.dataset.staggerIndex)
       : fallbackIndex;
-    const delay = Math.min(idx * 70, 420);
+    const delay = Math.min(idx * 50, 200);
 
     const isClipTarget = [...clipPathClasses].some((cls) => el.classList.contains(cls));
 
@@ -365,18 +365,18 @@
           { clipPath: "inset(0 100% 0 0)", opacity: 0.001 },
           { clipPath: "inset(0 0% 0 0)", opacity: 1 }
         ],
-        { duration: 860, delay, easing, fill: "both" }
+        { duration: 640, delay, easing, fill: "both" }
       );
       return;
     }
 
     el.animate(
       [
-        { opacity: 0.001, transform: "translate3d(0, 28px, 0) scale(0.985)", filter: "blur(3px)" },
-        { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)", filter: "blur(0)" }
+        { opacity: 0.001, transform: "translate3d(0, 20px, 0)" },
+        { opacity: 1, transform: "translate3d(0, 0, 0)" }
       ],
       {
-        duration: 880,
+        duration: 620,
         delay,
         easing,
         fill: "both"
