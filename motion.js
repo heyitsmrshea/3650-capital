@@ -699,6 +699,45 @@
     });
   }
 
+  // === CURSOR DOT ===
+  function initCursor() {
+    if (window.matchMedia("(hover: none)").matches || window.matchMedia("(pointer: coarse)").matches) return;
+    const dot = document.createElement("div");
+    dot.className = "cursor-dot";
+    document.body.appendChild(dot);
+    let mouseX = 0, mouseY = 0, dotX = 0, dotY = 0, visible = false;
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!visible) { visible = true; dot.classList.add("is-visible"); }
+    });
+    document.addEventListener("mouseleave", () => { visible = false; dot.classList.remove("is-visible"); });
+    document.querySelectorAll("a, button").forEach((el) => {
+      el.addEventListener("mouseenter", () => dot.classList.add("is-hover"));
+      el.addEventListener("mouseleave", () => dot.classList.remove("is-hover"));
+    });
+    (function loop() {
+      dotX += (mouseX - dotX) * 0.16;
+      dotY += (mouseY - dotY) * 0.16;
+      dot.style.left = dotX + "px";
+      dot.style.top = dotY + "px";
+      requestAnimationFrame(loop);
+    })();
+  }
+
+  // === SCROLL PROGRESS BAR ===
+  function initScrollProgress() {
+    const bar = document.createElement("div");
+    bar.className = "scroll-progress";
+    document.body.prepend(bar);
+    window.addEventListener("scroll", () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = total > 0 ? (window.scrollY / total * 100) + "%" : "0%";
+    }, { passive: true });
+  }
+
+  initCursor();
+  initScrollProgress();
   initDealMap();
   initCounters();
 })();
