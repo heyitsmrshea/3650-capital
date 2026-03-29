@@ -1048,7 +1048,8 @@ body.video-modal-open {
   border-top: 0;
 }
 
-.news-item:empty {
+.news-item:empty,
+.news-item:not(:has(*)) {
   display: none;
 }
 
