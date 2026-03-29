@@ -3932,3 +3932,22 @@ body::after {
   opacity: 1;
   transform: none;
 }
+
+/* Phase 5 — Press marquee */
+.press-names { overflow: hidden; }
+.press-names-inner {
+  display: flex;
+  gap: 56px;
+  align-items: center;
+  width: max-content;
+}
+.motion-enabled .press-names-inner {
+  animation: press-marquee 22s linear infinite;
+}
+.motion-enabled .press-names:hover .press-names-inner {
+  animation-play-state: paused;
+}
+@keyframes press-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}

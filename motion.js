@@ -767,9 +767,41 @@
     });
   }
 
+  // === SMOOTH ANCHORS ===
+  function initSmoothAnchors() {
+    const header = document.querySelector('.site-header');
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        const id = anchor.getAttribute('href').slice(1);
+        if (!id) return;
+        const target = document.getElementById(id);
+        if (!target) return;
+        e.preventDefault();
+        const offset = (header?.offsetHeight || 0) + 20;
+        const y = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      });
+    });
+  }
+
+  // === PRESS MARQUEE ===
+  function initPressMarquee() {
+    const container = document.querySelector('.press-names');
+    if (!container) return;
+    const items = Array.from(container.children);
+    if (items.length < 2) return;
+    const inner = document.createElement('div');
+    inner.className = 'press-names-inner';
+    items.forEach(item => inner.appendChild(item));
+    items.forEach(item => inner.appendChild(item.cloneNode(true)));
+    container.appendChild(inner);
+  }
+
   initCursor();
   initScrollProgress();
   initScrollReveal();
   initDealMap();
   initCounters();
+  initSmoothAnchors();
+  initPressMarquee();
 })();
