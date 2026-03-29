@@ -279,9 +279,22 @@
       });
 
       if (valid) {
-        form.style.display = "none";
-        formSuccess.classList.add("is-visible");
-        formSuccess.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        const btn = form.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = true; btn.textContent = "Sending\u2026"; }
+        fetch("https://api.web3forms.com/submit", { method: "POST", body: new FormData(form) })
+          .then((r) => r.json())
+          .then((json) => {
+            if (json.success) {
+              form.style.display = "none";
+              formSuccess.classList.add("is-visible");
+              formSuccess.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            } else {
+              if (btn) { btn.disabled = false; btn.textContent = "Submit inquiry"; }
+            }
+          })
+          .catch(() => {
+            if (btn) { btn.disabled = false; btn.textContent = "Submit inquiry"; }
+          });
       }
     });
 
@@ -613,5 +626,73 @@
     document.querySelectorAll("[data-counter-to]").forEach((el) => counterObs.observe(el));
   }
 
+  // ----- Deal map (Leaflet) -------------------------------------------
+  function initDealMap() {
+    const el = document.getElementById("deal-map");
+    if (!el || typeof L === "undefined") return;
+
+    const map = L.map(el, {
+      center: [36.5, -96.5],
+      zoom: 4,
+      scrollWheelZoom: false,
+      attributionControl: true,
+      zoomControl: true,
+    });
+
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+      attribution: '\u00a9 <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors \u00a9 <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: "abcd",
+      maxZoom: 19,
+    }).addTo(map);
+
+    const txIcon = L.divIcon({
+      className: "map-pin-tx",
+      html: "<span></span>",
+      iconSize: [12, 12],
+      iconAnchor: [6, 6],
+      popupAnchor: [0, -9],
+    });
+
+    const officeIcon = L.divIcon({
+      className: "map-pin-office",
+      html: "<span></span>",
+      iconSize: [14, 14],
+      iconAnchor: [7, 7],
+      popupAnchor: [0, -11],
+    });
+
+    const popupOpts = { maxWidth: 220, className: "map-popup" };
+
+    [
+      [25.99, -80.17, "Oasis at Dania Pointe", "$64.3M senior construction loan"],
+      [25.80, -80.20, "Gateway at Wynwood", "$79.0M senior construction loan"],
+      [30.27, -97.74, "48 East \u2014 Austin", "$90.9M senior construction loan"],
+      [47.25, -122.44, "Tacoma Marriott", "$82.0M senior construction loan"],
+      [33.02, -96.70, "Renaissance Dallas at Plano Legacy West", "$90.0M senior loan"],
+      [41.66, -83.56, "ICP/IRG Portfolio", "$180.0M senior loan \u2014 Ohio &amp; Michigan"],
+      [25.95, -80.14, "Aventura Self Storage", "$23.0M senior loan"],
+      [40.74, -74.03, "Waterfront Corporate Center I", "$30.0M preferred equity \u2014 Hoboken, NJ"],
+      [35.23, -80.84, "Transcoastal Portfolio", "$89.0M preferred equity \u2014 21 Sunbelt assets"],
+      [25.94, -80.25, "Center at Miami Gardens", "$49.3M senior construction loan"],
+    ].forEach(([lat, lng, name, detail]) => {
+      L.marker([lat, lng], { icon: txIcon })
+        .addTo(map)
+        .bindPopup(`<strong>${name}</strong><br><span>${detail}</span>`, popupOpts);
+    });
+
+    [
+      [25.74, -80.21, "Miami", "2977 McFarlane Road, Suite 300"],
+      [40.76, -73.97, "New York", "410 Park Avenue, Suite 720"],
+      [34.07, -118.40, "Los Angeles", "9595 Wilshire Blvd, Suite 611"],
+      [32.81, -96.81, "Dallas", "4143 Maple Ave, Suite 220"],
+      [33.85, -84.37, "Atlanta", "3050 Peachtree Road NW, Suite 320"],
+    ].forEach(([lat, lng, city, address]) => {
+      L.marker([lat, lng], { icon: officeIcon })
+        .addTo(map)
+        .bindPopup(`<strong>3650 Capital \u2014 ${city}</strong><br><span>${address}</span>`, popupOpts);
+    });
+  }
+
+  initDealMap();
   initCounters();
 })();
