@@ -736,8 +736,40 @@
     }, { passive: true });
   }
 
+  // === SCROLL REVEAL ===
+  function initScrollReveal() {
+    const sel = '.sub-card, .metric-card, .why-pillar, .legal-section, .founder-card, .transaction-tile, .office-card, .news-item, .section-stack-head, .statement-lead, .news-feature, .proof-case, .metrics-band-item, .firm-stat, .page-cta';
+    const targets = Array.from(document.querySelectorAll(sel));
+    if (!targets.length) return;
+    const seen = new Map();
+    targets.forEach(el => {
+      const key = el.parentElement;
+      const idx = seen.get(key) || 0;
+      seen.set(key, idx + 1);
+      el.style.setProperty('--reveal-delay', (idx * 55) + 'ms');
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -48px 0px', threshold: 0.07 });
+    targets.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      el.classList.add('reveal');
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('is-visible');
+      } else {
+        observer.observe(el);
+      }
+    });
+  }
+
   initCursor();
   initScrollProgress();
+  initScrollReveal();
   initDealMap();
   initCounters();
 })();

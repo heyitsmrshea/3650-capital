@@ -3920,3 +3920,15 @@ body::after {
   border-radius: 2px;
 }
 .motion-enabled .news-item:hover { background: rgba(19, 19, 19, 0.03); }
+
+/* Phase 4 — Scroll reveal */
+.motion-enabled .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 540ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+              transform 540ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+}
+.motion-enabled .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
