@@ -332,7 +332,12 @@
     ".metrics-grid > *",
     ".office-card",
     ".inquiry-form",
-    ".leadership-photo-card"
+    ".leadership-photo-card",
+    ".why-pillar",
+    ".firm-stat",
+    ".solutions-compare-col",
+    ".why-section-head > *",
+    ".solutions-compare-head > *"
   ];
 
   const revealTargets = [
@@ -348,7 +353,8 @@
   document.querySelectorAll(
     ".sub-grid, .sub-grid-3, .metrics-grid, .metrics-grid-wide, .founder-strip, " +
     ".sub-grid-ethos, .sub-grid-solutions, .sub-grid-leadership, .sub-grid-leadership-wide, " +
-    ".leadership-directory-grid, .contact-directory-grid, .sub-band"
+    ".leadership-directory-grid, .contact-directory-grid, .sub-band, " +
+    ".why-pillars, .firm-stats-band, .solutions-compare-grid"
   ).forEach((grid) => {
     [...grid.children].forEach((child, i) => {
       child.dataset.staggerIndex = String(i);
@@ -565,7 +571,7 @@
   if (window.matchMedia("(hover: hover)").matches) {
     const spotlightCards = [
       ...document.querySelectorAll(
-        ".sub-card, .metric-card, .founder-card, .office-card, .leadership-directory-card"
+        ".sub-card, .metric-card, .founder-card, .office-card, .leadership-directory-card, .why-pillar, .firm-stat, .solutions-compare-col"
       )
     ];
     spotlightCards.forEach((card) => {
