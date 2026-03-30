@@ -3,6 +3,12 @@
   document.querySelectorAll('.page-frame p:empty').forEach(p => p.remove());
   document.querySelectorAll('.page-frame > br, .site-header > br, .hero-grid > br, .sub-grid > br, .metrics-grid > br, .site-footer-grid > br').forEach(br => br.remove());
 
+  // Phase 8: Font-ready fade-in
+  const pageFrame = document.querySelector('.page-frame');
+  if (pageFrame) {
+    document.fonts.ready.then(() => pageFrame.classList.add('fonts-ready'));
+  }
+
   // Mobile nav toggle
   const navToggle = document.querySelector(".nav-toggle");
   const header = document.querySelector(".site-header");
@@ -390,7 +396,7 @@
     const idx = el.dataset.staggerIndex !== undefined
       ? Number(el.dataset.staggerIndex)
       : fallbackIndex;
-    const delay = Math.min(idx * 50, 200);
+    const delay = Math.min(idx * 80, 280);
 
     const isClipTarget = [...clipPathClasses].some((cls) => el.classList.contains(cls));
 
@@ -573,7 +579,7 @@
       if (header) header.classList.toggle("is-scrolled", scrollTop > 80);
 
       if (heroVisualFrame) {
-        const parallax = Math.min(scrollTop * 0.16, 72);
+        const parallax = Math.min(scrollTop * 0.25, 90);
         heroVisualFrame.style.setProperty("--hero-parallax", `${parallax}px`);
       }
 
