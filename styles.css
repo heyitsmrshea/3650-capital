@@ -3996,6 +3996,13 @@ body.nav-lock { overflow: hidden; }
   .firm-stat:last-child { border-bottom: 0; }
 }
 
+/* --- Fix: WP theme img{width:100%!important} override for Leaflet tiles -- */
+#deal-map img {
+  width: auto !important;
+  max-width: none !important;
+  display: inline !important;
+}
+
 /* --- Fix #13: Map fallback when tiles fail to load ------------------------ */
 #deal-map:empty::after {
   content: "Map loading\2026";
@@ -4010,7 +4017,7 @@ body.nav-lock { overflow: hidden; }
 }
 
 /* --- Fix #14: Footer logo proportional size ------------------------------- */
-.site-footer-mark img { width: 72px; }
+.site-footer-mark img { width: 72px !important; max-width: 72px !important; }
 
 /* ============================================================
    Phase 8 — Final visual polish
