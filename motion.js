@@ -627,8 +627,8 @@
 
     const run = (el) => {
       const to = Number(el.dataset.counterTo);
-      const prefix = el.dataset.counterPrefix;
-      const suffix = el.dataset.counterSuffix;
+      const prefix = el.dataset.counterPrefix || "";
+      const suffix = el.dataset.counterSuffix || "";
       const start = performance.now();
       const step = (now) => {
         const t = Math.min((now - start) / DURATION, 1);
