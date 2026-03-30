@@ -3955,6 +3955,63 @@ body::after {
 /* Phase 6 — Mobile nav scroll lock */
 body.nav-lock { overflow: hidden; }
 
+/* ============================================================
+   Phase 7 — WordPress wpautop neutralizer + visual polish
+   ============================================================ */
+
+/* --- wpautop: hide empty <p> that break grid layouts ---------------------- */
+.page-frame p:empty { display: none !important; }
+
+/* --- wpautop: non-empty <p> wrappers that break grid children ------------- */
+.site-header > p,
+.feature-split > p,
+.hero-rail > p { display: contents; }
+
+/* --- Fix #3: Legal page hero spacing below sticky header ------------------ */
+.legal-main { padding-top: 36px; }
+
+/* --- Fix #9: Contact form field visibility -------------------------------- */
+.inquiry-form input,
+.inquiry-form select,
+.inquiry-form textarea {
+  background: rgba(255, 255, 255, 0.45);
+  border-color: rgba(19, 19, 19, 0.28);
+}
+.inquiry-form input:focus,
+.inquiry-form select:focus,
+.inquiry-form textarea:focus {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: var(--accent);
+}
+
+/* --- Fix #10: Solutions comparison row alternating tint -------------------- */
+.solutions-compare-row:nth-child(odd) {
+  background: rgba(19, 19, 19, 0.022);
+}
+
+/* --- Fix #12: Firm stats single-column on narrow mobile ------------------- */
+@media (max-width: 420px) {
+  .firm-stats-band { grid-template-columns: 1fr; }
+  .firm-stat { border-bottom: 1px solid var(--line); padding-bottom: 14px; }
+  .firm-stat:last-child { border-bottom: 0; }
+}
+
+/* --- Fix #13: Map fallback when tiles fail to load ------------------------ */
+#deal-map:empty::after {
+  content: "Map loading\2026";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* --- Fix #14: Footer logo proportional size ------------------------------- */
+.site-footer-mark img { width: 72px; }
+
 /* Phase 6 — Print styles */
 @media print {
   body::after,

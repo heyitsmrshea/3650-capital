@@ -1,4 +1,8 @@
 (() => {
+  // Phase 7: wpautop DOM cleanup — remove stray empty <p> and <br> from grid containers
+  document.querySelectorAll('.page-frame p:empty').forEach(p => p.remove());
+  document.querySelectorAll('.page-frame > br, .site-header > br, .hero-grid > br, .sub-grid > br, .metrics-grid > br, .site-footer-grid > br').forEach(br => br.remove());
+
   // Mobile nav toggle
   const navToggle = document.querySelector(".nav-toggle");
   const header = document.querySelector(".site-header");
