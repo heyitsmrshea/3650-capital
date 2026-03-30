@@ -4033,6 +4033,77 @@ body.nav-lock { overflow: hidden; }
 /* --- News-list stray <p> gaps (WP injects non-empty whitespace) ----------- */
 .news-list > p { display: none !important; }
 
+/* ============================================================
+   Phase 9 — Typography overrides (WP theme uses !important on
+   h1/h2/h3 font-size, forcing us to match)
+   ============================================================ */
+
+/* --- Global heading scale inside our content ------------------------------ */
+.page-frame h1 { font-size: clamp(1.72rem, 2.45vw, 2.48rem) !important; line-height: 0.93 !important; }
+.page-frame h2 { font-size: clamp(1.82rem, 2.8vw, 2.76rem) !important; line-height: 0.97 !important; }
+.page-frame h3 { font-size: clamp(1.18rem, 1.36vw, 1.42rem) !important; line-height: 1.05 !important; }
+
+/* --- Base body text: WP theme inflates to 20px, we need ~16px ------------- */
+.page-frame p,
+.page-frame li { font-size: 0.98rem !important; }
+.page-frame .lede { font-size: 0.98rem !important; }
+
+/* --- Legal pages: compact, professional typography ------------------------ */
+.legal-section h2 {
+  font-size: clamp(1.28rem, 1.5vw, 1.66rem) !important;
+  line-height: 1.12 !important;
+}
+.legal-section p,
+.legal-section li {
+  font-size: 0.92rem !important;
+  line-height: 1.72 !important;
+}
+.legal-summary li {
+  font-size: 0.86rem !important;
+  line-height: 1.6 !important;
+}
+.legal-hero-copy h1 {
+  font-size: clamp(1.88rem, 2.55vw, 2.45rem) !important;
+}
+
+/* --- Metric lists: product specs should be compact ------------------------ */
+.metric-list li {
+  font-size: 0.88rem !important;
+  line-height: 1.62 !important;
+}
+
+/* --- Card body text ------------------------------------------------------- */
+.sub-card p,
+.metric-card p { font-size: 0.92rem !important; }
+
+/* --- Footer typography ---------------------------------------------------- */
+.site-footer p { font-size: 0.92rem !important; }
+.site-footer .section-kicker { font-size: 0.7rem !important; }
+.site-footer-bottom p { font-size: 0.74rem !important; }
+
+/* --- Hide WP "Proudly Powered by WordPress" ------------------------------- */
+.wp-block-paragraph { display: none !important; }
+
+/* --- Subpage hero h1 (already correct, just needs !important armor) ------- */
+.sub-hero-copy h1 { font-size: clamp(1.72rem, 2.45vw, 2.48rem) !important; }
+
+/* --- Transaction page headings -------------------------------------------- */
+.transaction-stage h1 { font-size: clamp(1.82rem, 2.8vw, 2.76rem) !important; }
+.transaction-tile h3 { font-size: clamp(1.08rem, 1.2vw, 1.28rem) !important; }
+.transaction-slide h2 { font-size: clamp(1.4rem, 2vw, 2rem) !important; }
+
+/* --- Page CTA headings ---------------------------------------------------- */
+.page-cta h2 { font-size: clamp(1.7rem, 2.9vw, 2.6rem) !important; }
+.page-cta p { font-size: 0.92rem !important; }
+
+/* --- Statement band ------------------------------------------------------- */
+.statement-lead h2 { font-size: clamp(1.82rem, 2.8vw, 2.76rem) !important; }
+
+/* --- Why section ---------------------------------------------------------- */
+.why-section-head h2 { font-size: clamp(1.82rem, 2.8vw, 2.76rem) !important; }
+.why-pillar h3 { font-size: clamp(1.18rem, 1.36vw, 1.42rem) !important; }
+.why-pillar p { font-size: 0.92rem !important; }
+
 /* --- Metrics band counter: larger text for visual impact ------------------ */
 .metrics-band-item strong {
   font-size: clamp(2.8rem, 4.4vw, 3.8rem);
