@@ -7,6 +7,7 @@
     navToggle.addEventListener("click", () => {
       const isOpen = header.classList.toggle("nav-open");
       navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      document.body.classList.toggle("nav-lock", isOpen);
     });
     // Close nav when a link is clicked on mobile
     nav.querySelectorAll("a").forEach((link) => {
@@ -14,6 +15,7 @@
         if (window.innerWidth <= 720) {
           header.classList.remove("nav-open");
           navToggle.setAttribute("aria-expanded", "false");
+          document.body.classList.remove("nav-lock");
         }
       });
     });
@@ -188,7 +190,16 @@
     });
 
     window.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && modal.classList.contains("is-open")) close();
+      if (!modal.classList.contains("is-open")) return;
+      if (event.key === "Escape") { close(); return; }
+      if (event.key === "Tab") {
+        const focusable = modal.querySelectorAll('button, [href], iframe, [tabindex]:not([tabindex="-1"])');
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
     });
   }
 
@@ -206,6 +217,7 @@
       const setOpen = (next) => {
         tile.classList.toggle("is-open", next);
         panel.setAttribute("aria-hidden", next ? "false" : "true");
+        toggle.setAttribute("aria-expanded", next ? "true" : "false");
       };
 
       toggle.addEventListener("click", (event) => {

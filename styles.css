@@ -3951,3 +3951,33 @@ body::after {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+
+/* Phase 6 — Mobile nav scroll lock */
+body.nav-lock { overflow: hidden; }
+
+/* Phase 6 — Print styles */
+@media print {
+  body::after,
+  .scroll-progress,
+  .site-header,
+  .site-footer,
+  .award-rail,
+  .press-rail,
+  .page-cta,
+  .video-modal,
+  .map-section,
+  .nav-toggle,
+  .skip-link { display: none !important; }
+  .page-frame { max-width: 100%; }
+  .legal-main,
+  .subpage-main { padding-top: 0; }
+  .legal-hero-media,
+  .sub-hero-media { display: none; }
+  .legal-hero-copy,
+  .sub-hero-copy { max-width: 100%; }
+  a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #666; }
+  .text-link::after,
+  .site-footer a::after,
+  .press-name::after { content: none !important; }
+  .legal-section { break-inside: avoid; }
+}
