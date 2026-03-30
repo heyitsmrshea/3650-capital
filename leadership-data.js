@@ -1,7 +1,7 @@
 window.LEADERSHIP_MEMBERS = [
   {
     name: "Corey Altman",
-    role: "Senior Associate",
+    role: "Vice President",
     image: "./assets/media/3650-0608-Edit-scaled.jpg",
     bioUrl: null,
     bio: []
@@ -49,8 +49,15 @@ window.LEADERSHIP_MEMBERS = [
   },
   {
     name: "Tess Campbell",
-    role: "Analyst",
+    role: "Associate",
     image: "./assets/media/3650-Headshots-Oct-2023-Miami-A0994_2-scaled.jpg",
+    bioUrl: null,
+    bio: []
+  },
+  {
+    name: "Jared Carney",
+    role: "Senior Advisor & Chief Strategist",
+    image: "",
     bioUrl: null,
     bio: []
   },
@@ -92,11 +99,11 @@ window.LEADERSHIP_MEMBERS = [
   },
   {
     name: "Julia Ferrier",
-    role: "Senior Associate",
+    role: "Vice President",
     image: "./assets/media/3650-Headshots-Oct-2023-Miami-A0638-2-scaled.jpg",
     bioUrl: null,
     bio: [
-      "Julia Ferrier is a Senior Associate in the Investment Management division of 3650 Capital. Julia has been with 3650 since 2021.",
+      "Julia Ferrier is a Vice President in the Investment Management division of 3650 Capital. Julia has been with 3650 since 2021.",
       "She previously worked in Investment Banking at Citi, working on a range of transactions in the Alternative Energy sector.",
       "Julia holds a B.S. in Applied Economics and Management from Cornell University."
     ]
@@ -114,18 +121,18 @@ window.LEADERSHIP_MEMBERS = [
   },
   {
     name: "Raelene Vepuri",
-    role: "Senior Associate",
+    role: "Vice President",
     image: "./assets/media/3650-Headshots-Oct-2023-Miami-A0731-scaled.jpg",
     bioUrl: null,
     bio: []
   },
   {
     name: "Andre Gonzalez",
-    role: "Managing Director",
+    role: "Managing Director, Capital & Partner Solutions",
     image: "./assets/media/3650-Headshots-Oct-2023-Miami-A0073-scaled.jpg",
     bioUrl: null,
     bio: [
-      "Andre Gonzalez is a Managing Director at 3650 Capital where he focuses on capital formation, investor relations, and strategic growth initiatives including M&A. Andre was previously a Director at InvestRes, a real estate private equity firm with $1.5 billion in assets under management. Andre graduated with a BA from Harvard University."
+      "Andre Gonzalez is a Managing Director, Capital & Partner Solutions at 3650 Capital where he focuses on capital formation, investor relations, and strategic growth initiatives including M&A. Andre was previously a Director at InvestRes, a real estate private equity firm with $1.5 billion in assets under management. Andre graduated with a BA from Harvard University."
     ]
   },
   {
@@ -137,7 +144,7 @@ window.LEADERSHIP_MEMBERS = [
   },
   {
     name: "Alvaro Guerra",
-    role: "Controller",
+    role: "Director",
     image: "./assets/media/3650-1039-scaled.jpg",
     bioUrl: null,
     bio: []
@@ -188,6 +195,13 @@ window.LEADERSHIP_MEMBERS = [
       "Prior to Grass River, Kennedy and Cobb served as Co-CEOs of LNR Property LLC. Mr. Kennedy led the firm’s strategic direction and investment activities across LNR’s global CRE debt, equity and distressed assets platforms. Prior to LNR, Mr. Kennedy served 11 years at Deutsche Bank as Managing Director and Global Head of Real Estate Capital Markets. Prior to Deutsche Bank, Mr. Kennedy was Head of CMBS Trading at Goldman Sachs and a member of the firm’s Principal Investment Group.",
       "He spent the first eight years of his career in the real estate development business in California and Colorado. Mr. Kennedy holds an A.B. in Economics from Stanford University and an M.B.A. from UCLA."
     ]
+  },
+  {
+    name: "Eric Kraft",
+    role: "Managing Director",
+    image: "./assets/media/eric-kraft-headshot.jpeg",
+    bioUrl: null,
+    bio: []
   },
   {
     name: "Michael Kundin",
@@ -246,11 +260,11 @@ window.LEADERSHIP_MEMBERS = [
   },
   {
     name: "Will Pierce",
-    role: "Director",
+    role: "Managing Director",
     image: "./assets/media/151A8204.jpg",
     bioUrl: null,
     bio: [
-      "Mr. Pierce, Director, has 7 years of commercial real estate investment experience and works within the 3650 Capital Bridge and Event Driven lending platform. In 2014, Mr. Pierce joined 3650 Capital’s CRE equity and development affiliate, Grass River Property, a leading South Florida developer with approximately 2 million sq feet of real estate owned.",
+      "Mr. Pierce, Managing Director, has 7 years of commercial real estate investment experience and works within the 3650 Capital Bridge and Event Driven lending platform. In 2014, Mr. Pierce joined 3650 Capital’s CRE equity and development affiliate, Grass River Property, a leading South Florida developer with approximately 2 million sq feet of real estate owned.",
       "Mr. Pierce holds a B.S. in Building Science from Auburn University and a master's degree in Real Estate Development + Urbanism from the University of Miami."
     ]
   },
@@ -281,7 +295,7 @@ window.LEADERSHIP_MEMBERS = [
   },
   {
     name: "Martin Rivas, CPA",
-    role: "Chief Accounting Officer",
+    role: "Managing Director & Chief Accounting Officer",
     image: "./assets/media/3650-Headshots-Oct-2023-Miami-A1141-2-2-scaled.jpg",
     bioUrl: null,
     bio: []
@@ -336,8 +350,15 @@ window.LEADERSHIP_MEMBERS = [
   },
   {
     name: "Daniel Vaknin",
-    role: "Senior Associate",
+    role: "Vice President",
     image: "./assets/media/3650-1192-Edit.jpg",
+    bioUrl: null,
+    bio: []
+  },
+  {
+    name: "John Wright",
+    role: "Managing Partner & Head of Capital Formation",
+    image: "./assets/media/john-wright-headshot.jpg",
     bioUrl: null,
     bio: []
   }

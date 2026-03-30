@@ -182,9 +182,11 @@
       const videoId = trigger.getAttribute("data-video-id");
       if (!videoId) return;
       lastTrigger = trigger;
+      const videoHash = trigger.getAttribute("data-video-hash");
+      const hashParam = videoHash ? `&h=${videoHash}` : "";
       frame.setAttribute(
         "src",
-        `https://player.vimeo.com/video/${videoId}?autoplay=1&title=0&byline=0&portrait=0&dnt=1`
+        `https://player.vimeo.com/video/${videoId}?autoplay=1${hashParam}&title=0&byline=0&portrait=0&dnt=1`
       );
       modal.classList.add("is-open");
       modal.setAttribute("aria-hidden", "false");
@@ -334,6 +336,8 @@
     ".hero-copy",
     ".hero-visual",
     ".hero-rail",
+    ".name-origin-lead > *",
+    ".name-origin-copy",
     ".statement-lead",
     ".statement-grid article",
     ".feature-copy > *",

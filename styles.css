@@ -539,6 +539,51 @@ h1 span {
   color: rgba(19, 19, 19, 0.72);
 }
 
+.name-origin {
+  margin-top: 58px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px 40px;
+  align-items: center;
+  position: relative;
+  padding-top: 36px;
+}
+
+.name-origin::before {
+  content: "";
+  position: absolute;
+  top: -26px;
+  left: 0;
+  width: min(300px, 36vw);
+  border-top: 2px solid rgba(19, 19, 19, 0.16);
+}
+
+.name-origin-lead .section-kicker {
+  margin-bottom: 6px;
+}
+
+.name-origin-lead h2 {
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+  line-height: 1;
+  margin: 0;
+}
+
+.name-origin-sub {
+  margin-top: 8px;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(1.2rem, 1.8vw, 1.48rem);
+  font-style: italic;
+  color: rgba(19, 19, 19, 0.62);
+}
+
+.name-origin-copy p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  line-height: 1.68;
+  max-width: 52ch;
+}
+
 .statement-band {
   margin-top: 58px;
   display: grid;
@@ -886,7 +931,7 @@ body.video-modal-open {
 }
 
 .proof-columns {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px 28px;
 }
 
@@ -1283,6 +1328,16 @@ body.video-modal-open {
   .hero-stance span {
     grid-column: auto;
     max-width: 58ch;
+  }
+
+  .name-origin {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .name-origin::before {
+    top: -16px;
+    width: 180px;
   }
 
   .statement-band,
@@ -1790,7 +1845,7 @@ body.video-modal-open {
 
 .solutions-product-grid,
 .solutions-target-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px 18px;
 }
 
@@ -2072,6 +2127,8 @@ body.video-modal-open {
   padding: 18px;
   border: 1px solid var(--line);
   align-items: start;
+  max-height: calc(100vh - 110px);
+  overflow: hidden;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08)),
     linear-gradient(135deg, rgba(19, 63, 55, 0.03), transparent 54%);
@@ -2100,8 +2157,11 @@ body.video-modal-open {
 }
 
 .leadership-stage-copy {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .leadership-stage-copy h3 {
@@ -2112,8 +2172,9 @@ body.video-modal-open {
 .leadership-stage-bio {
   display: grid;
   gap: 12px;
-  max-height: 20rem;
-  overflow: auto;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
   padding-right: 4px;
   margin-top: 2px;
 }
