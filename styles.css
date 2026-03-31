@@ -2268,6 +2268,16 @@ body.video-modal-open {
   filter: saturate(1.02) contrast(1.03);
 }
 
+.directory-photo img[src=""],
+.directory-photo img:not([src]) {
+  display: none;
+}
+
+.leadership-directory-card:has(.directory-photo img[src=""]) .directory-photo,
+.leadership-directory-card:has(.directory-photo img:not([src])) .directory-photo {
+  display: none;
+}
+
 .directory-copy {
   display: grid;
   gap: 8px;
