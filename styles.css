@@ -597,7 +597,7 @@ h1 span {
 .statement-band {
   margin-top: 58px;
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.4fr);
   gap: 34px;
   align-items: start;
   position: relative;
@@ -656,7 +656,7 @@ h1 span {
 }
 
 .statement-grid .statement-wide {
-  max-width: 42ch;
+  max-width: none;
 }
 
 .statement-media {
@@ -1984,7 +1984,19 @@ body.video-modal-open {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
-  align-items: start;
+}
+
+.portfolio-footprint .metrics-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.portfolio-footprint .metric-card {
+  grid-column: 1;
+}
+
+.portfolio-footprint .metric-photo {
+  grid-column: 2;
+  grid-row: 1 / span 3;
 }
 
 .metrics-grid-wide {
