@@ -333,7 +333,7 @@ h3 {
   left: clamp(20px, 3.2vw, 48px);
   bottom: clamp(26px, 4vw, 58px);
   z-index: 2;
-  width: min(36ch, 34%);
+  width: min(48ch, 42%);
   padding: clamp(18px, 2.4vw, 30px);
   background: linear-gradient(135deg, rgba(238, 230, 215, 0.9), rgba(238, 230, 215, 0.72));
   border: 1px solid rgba(19, 19, 19, 0.18);
@@ -387,7 +387,7 @@ h1 span {
 
 .lede {
   margin-top: 18px;
-  max-width: 34ch;
+  max-width: 48ch;
 }
 
 .hero-visual {
@@ -591,7 +591,7 @@ h1 span {
   color: var(--ink-soft);
   font-size: 0.98rem;
   line-height: 1.68;
-  max-width: 52ch;
+  max-width: 68ch;
 }
 
 .statement-band {
@@ -1984,6 +1984,7 @@ body.video-modal-open {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
+  align-items: start;
 }
 
 .metrics-grid-wide {
@@ -2048,7 +2049,7 @@ body.video-modal-open {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 36%;
+  object-position: center 18%;
   transform: translate3d(var(--mx, 0px), var(--my, 0px), 0) scale(var(--media-scale, 1));
   transition: transform 920ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -4258,6 +4259,33 @@ body.nav-lock { overflow: hidden; }
   box-shadow: 0 12px 40px rgba(19, 19, 19, 0.1);
 }
 
+/* --- Portfolio map glow effect --------------------------------------------- */
+.portfolio-footprint .metric-photo {
+  position: relative;
+}
+
+.portfolio-footprint .metric-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle 8px at 72% 52%, rgba(91, 168, 152, 0.7), transparent 100%),
+    radial-gradient(circle 8px at 58% 48%, rgba(91, 168, 152, 0.6), transparent 100%),
+    radial-gradient(circle 8px at 82% 56%, rgba(91, 168, 152, 0.5), transparent 100%),
+    radial-gradient(circle 6px at 45% 44%, rgba(91, 168, 152, 0.5), transparent 100%),
+    radial-gradient(circle 6px at 68% 62%, rgba(200, 160, 96, 0.5), transparent 100%),
+    radial-gradient(circle 6px at 76% 44%, rgba(200, 160, 96, 0.4), transparent 100%),
+    radial-gradient(circle 6px at 55% 58%, rgba(200, 160, 96, 0.4), transparent 100%);
+  mix-blend-mode: screen;
+  animation: map-glow 3s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes map-glow {
+  0% { opacity: 0.4; filter: blur(3px); }
+  50% { opacity: 1; filter: blur(5px); }
+  100% { opacity: 0.5; filter: blur(4px); }
+}
+
 /* --- Theme toggle button -------------------------------------------------- */
 .theme-toggle {
   display: flex;
@@ -4304,13 +4332,37 @@ body.nav-lock { overflow: hidden; }
   --line-strong: rgba(232, 224, 212, 0.24);
 }
 
-[data-theme="dark"] body {
-  background: #141210;
-  color: var(--ink);
+html[data-theme="dark"],
+html[data-theme="dark"] body,
+html[data-theme="dark"] .wp-site-blocks,
+html[data-theme="dark"] .is-root-container,
+html[data-theme="dark"] .wp-block-post-content,
+html[data-theme="dark"] .entry-content,
+html[data-theme="dark"] main.wp-block-group {
+  background: #141210 !important;
+  background-color: #141210 !important;
+  background-image: none !important;
+  color: #e8e0d4 !important;
+}
+
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5 {
+  color: #e8e0d4 !important;
 }
 
 [data-theme="dark"] body::before {
   opacity: 0.3;
+}
+
+[data-theme="dark"] .page-frame {
+  background: none;
+}
+
+[data-theme="dark"] .site-header {
+  color: var(--ink);
 }
 
 [data-theme="dark"] .site-header.is-scrolled {
@@ -4448,6 +4500,26 @@ body.nav-lock { overflow: hidden; }
   color: var(--ink);
   border-color: var(--ink-soft);
   background: rgba(232, 224, 212, 0.06);
+}
+
+[data-theme="dark"] .page-frame,
+[data-theme="dark"] .page-frame h1,
+[data-theme="dark"] .page-frame h2,
+[data-theme="dark"] .page-frame h3,
+[data-theme="dark"] .page-frame p,
+[data-theme="dark"] .page-frame li,
+[data-theme="dark"] .page-frame strong,
+[data-theme="dark"] .page-frame span,
+[data-theme="dark"] .page-frame a {
+  color: var(--ink);
+}
+
+[data-theme="dark"] .page-frame .item-label,
+[data-theme="dark"] .page-frame .lede,
+[data-theme="dark"] .sub-card p,
+[data-theme="dark"] .metric-card p,
+[data-theme="dark"] .leadership-stage-bio p {
+  color: var(--ink-soft);
 }
 
 [data-theme="dark"] .section-kicker {
