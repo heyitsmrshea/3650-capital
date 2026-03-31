@@ -1915,7 +1915,7 @@ body.video-modal-open {
   margin: 0;
   overflow: hidden;
   background: #d9d5cf;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1 / 1.06;
 }
 
 .founder-card-media img {
