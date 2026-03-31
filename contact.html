@@ -136,7 +136,10 @@
             <h2>Contact the right team.</h2>
           </div>
           <div class="inquiry-wrap contact-routing-grid">
-              <form class="inquiry-form" id="inquiry-form" action="#" method="post" novalidate>
+              <form class="inquiry-form" id="inquiry-form" action="https://api.web3forms.com/submit" method="post" novalidate>
+                <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+                <input type="hidden" name="subject" value="New inquiry from 3650capital.com" />
+                <input type="hidden" name="redirect" value="https://3650capital.com/contact.html" />
                 <label>
                   <span>Name <abbr title="required" aria-label="required">*</abbr></span>
                   <input type="text" name="name" autocomplete="name" required />

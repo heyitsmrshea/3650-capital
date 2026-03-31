@@ -56,7 +56,7 @@
       const bio = member.bio.length ? member.bio : placeholderBio(member);
       stage.innerHTML = `
         <figure class="leadership-stage-media">
-          <img src="${member.image}" alt="${member.name}" />
+          <img src="${member.image}" alt="${member.name}" loading="lazy" />
         </figure>
         <div class="leadership-stage-copy">
           <p class="item-label">${member.role}</p>
@@ -119,7 +119,7 @@
       button.className = "leadership-directory-card";
       button.innerHTML = `
         <span class="directory-photo">
-          <img src="${member.image}" alt="${member.name}" />
+          <img src="${member.image}" alt="${member.name}" loading="lazy" />
         </span>
         <span class="directory-copy">
           <span class="item-label">${member.role}</span>
