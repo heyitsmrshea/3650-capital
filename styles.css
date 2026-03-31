@@ -1996,6 +1996,7 @@ body.video-modal-open {
 .portfolio-footprint .metric-photo {
   grid-column: 2;
   grid-row: 1 / span 3;
+  border: none;
 }
 
 .portfolio-footprint .metric-photo img {
