@@ -1,3 +1,10 @@
+/* WordPress Blank Canvas overrides */
+html.wp-site-blocks,
+body.wp-singular {
+  overflow: visible !important;
+  overflow-y: visible !important;
+}
+
 :root {
   --paper: #eee6d7;
   --paper-strong: #e0d3bc;
