@@ -140,7 +140,14 @@
         renderStage(member);
       };
 
-      button.addEventListener("click", () => activate({ lock: true }));
+      button.addEventListener("click", () => {
+        activate({ lock: true });
+        // Scroll bio panel into view when clicking a member deep in the roster
+        const stageRect = stage.getBoundingClientRect();
+        if (stageRect.top < 0 || stageRect.bottom > window.innerHeight) {
+          stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
       button.addEventListener("focus", () => activate());
       if (window.matchMedia("(hover: hover)").matches) {
         button.addEventListener("mouseenter", () => activate());
