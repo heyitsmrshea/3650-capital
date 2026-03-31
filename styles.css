@@ -1999,6 +1999,10 @@ body.video-modal-open {
   grid-row: 1 / span 3;
 }
 
+.portfolio-footprint .metric-photo img {
+  object-position: 55% center;
+}
+
 .metrics-grid-wide {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
