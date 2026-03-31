@@ -57,7 +57,7 @@ window.LEADERSHIP_MEMBERS = [
   {
     name: "Jared Carney",
     role: "Senior Advisor & Chief Strategist",
-    image: "",
+    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Crect fill='%23d4cec4' width='400' height='400'/%3E%3Ctext x='200' y='220' font-family='Archivo,sans-serif' font-size='120' font-weight='600' fill='%234c473f' text-anchor='middle'%3EJC%3C/text%3E%3C/svg%3E",
     bioUrl: null,
     bio: []
   },

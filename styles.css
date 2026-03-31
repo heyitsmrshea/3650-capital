@@ -542,7 +542,7 @@ h1 span {
 .name-origin {
   margin-top: 58px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
   gap: 24px 40px;
   align-items: center;
   position: relative;
@@ -587,7 +587,7 @@ h1 span {
 .statement-band {
   margin-top: 58px;
   display: grid;
-  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
   gap: 34px;
   align-items: start;
   position: relative;
@@ -679,7 +679,7 @@ h1 span {
 
 .feature-split {
   display: grid;
-  grid-template-columns: minmax(0, 0.64fr) minmax(0, 1.36fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
   gap: 36px;
   align-items: start;
 }
@@ -1843,6 +1843,10 @@ body.video-modal-open {
   gap: 16px;
 }
 
+.sub-grid-solutions {
+  align-items: start;
+}
+
 .solutions-product-grid,
 .solutions-target-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2082,7 +2086,7 @@ body.video-modal-open {
 
 .contact-main .sub-hero-media img {
   aspect-ratio: 1.48 / 1;
-  object-position: center 48%;
+  object-position: center 30%;
 }
 
 .leadership-photo-card {
@@ -2312,6 +2316,14 @@ body.video-modal-open {
   margin-top: 10px;
   color: var(--ink-soft);
   line-height: 1.62;
+}
+
+.office-pending {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: 0.6;
 }
 
 .office-card a {
