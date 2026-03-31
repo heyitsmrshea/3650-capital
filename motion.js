@@ -600,21 +600,35 @@
 
   window.addEventListener("scroll", handleScroll, { passive: true });
 
-  // === CARD SPOTLIGHT ===
+  // === CARD SPOTLIGHT + 3D TILT ===
   if (window.matchMedia("(hover: hover)").matches) {
     const spotlightCards = [
       ...document.querySelectorAll(
         ".sub-card, .metric-card, .founder-card, .office-card, .leadership-directory-card, .why-pillar, .firm-stat, .solutions-compare-col"
       )
     ];
+    const tiltCards = new Set(document.querySelectorAll(".sub-card, .metric-card, .founder-card, .office-card"));
     spotlightCards.forEach((card) => {
+      const shouldTilt = tiltCards.has(card);
       card.addEventListener("pointermove", (e) => {
         const rect = card.getBoundingClientRect();
         const x = ((e.clientX - rect.left) / rect.width) * 100;
         const y = ((e.clientY - rect.top) / rect.height) * 100;
         card.style.setProperty("--spotlight-x", `${x}%`);
         card.style.setProperty("--spotlight-y", `${y}%`);
+        if (shouldTilt) {
+          const rx = ((y - 50) / 50) * -3;
+          const ry = ((x - 50) / 50) * 3;
+          card.style.setProperty("--tilt-rx", `${rx}deg`);
+          card.style.setProperty("--tilt-ry", `${ry}deg`);
+        }
       });
+      if (shouldTilt) {
+        card.addEventListener("pointerleave", () => {
+          card.style.setProperty("--tilt-rx", "0deg");
+          card.style.setProperty("--tilt-ry", "0deg");
+        });
+      }
     });
   }
 
@@ -623,28 +637,45 @@
     const DURATION = 1600;
     const ease = (t) => 1 - Math.pow(1 - t, 3);
 
-    document.querySelectorAll(".tag-strip li, .transaction-stage-meta strong").forEach((el) => {
+    document.querySelectorAll(".tag-strip li, .transaction-stage-meta strong, .metric-card h3").forEach((el) => {
       const raw = el.textContent.trim();
-      // Match: optional $ prefix, integer digits with optional commas, optional trailing + or %
-      const m = raw.match(/^(\$?)(\d[\d,]*)(\+|%)?$/);
+      // Match: $16.3 billion, 1,300+ properties, $11.5 billion, $49.3M, etc.
+      const m = raw.match(/^(\$?)([\d,]+\.?\d*)\s*(\+?)(.*)$/);
       if (!m) return;
-      const [, prefix, numStr, suffix = ""] = m;
-      const target = parseInt(numStr.replace(/,/g, ""), 10);
+      const [, prefix, numStr, plus, textSuffix] = m;
+      const target = parseFloat(numStr.replace(/,/g, ""));
       if (!target || target < 2) return;
+      const hasDecimal = numStr.includes(".");
+      const decimals = hasDecimal ? (numStr.split(".")[1] || "").length : 0;
       el.dataset.counterTo = String(target);
       el.dataset.counterPrefix = prefix;
-      el.dataset.counterSuffix = suffix;
+      el.dataset.counterSuffix = plus + (textSuffix ? " " + textSuffix.trim() : "");
+      el.dataset.counterDecimals = String(decimals);
+      el.dataset.counterCommas = numStr.includes(",") ? "1" : "";
     });
 
     const run = (el) => {
       const to = Number(el.dataset.counterTo);
       const prefix = el.dataset.counterPrefix || "";
       const suffix = el.dataset.counterSuffix || "";
+      const decimals = Number(el.dataset.counterDecimals || 0);
+      const useCommas = el.dataset.counterCommas === "1";
       const start = performance.now();
       const step = (now) => {
         const t = Math.min((now - start) / DURATION, 1);
-        const val = Math.round(to * ease(t));
-        el.textContent = `${prefix}${val.toLocaleString()}${suffix}`;
+        let val = to * ease(t);
+        let display;
+        if (decimals > 0) {
+          display = val.toFixed(decimals);
+        } else {
+          display = Math.round(val).toString();
+        }
+        if (useCommas) {
+          const parts = display.split(".");
+          parts[0] = Number(parts[0]).toLocaleString();
+          display = parts.join(".");
+        }
+        el.textContent = `${prefix}${display}${suffix}`;
         if (t < 1) requestAnimationFrame(step);
       };
       requestAnimationFrame(step);
@@ -830,6 +861,72 @@
     container.appendChild(inner);
   }
 
+  // === DARK / LIGHT THEME TOGGLE ===
+  function initThemeToggle() {
+    const saved = localStorage.getItem("3650-theme");
+    if (saved === "dark") document.documentElement.setAttribute("data-theme", "dark");
+
+    const btn = document.createElement("button");
+    btn.className = "theme-toggle";
+    btn.type = "button";
+    btn.setAttribute("aria-label", "Toggle dark mode");
+
+    // Build SVG icons using DOM methods (no innerHTML)
+    const sunSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    sunSvg.setAttribute("class", "theme-icon-sun");
+    sunSvg.setAttribute("width", "16");
+    sunSvg.setAttribute("height", "16");
+    sunSvg.setAttribute("viewBox", "0 0 24 24");
+    sunSvg.setAttribute("fill", "none");
+    sunSvg.setAttribute("stroke", "currentColor");
+    sunSvg.setAttribute("stroke-width", "2");
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", "12"); circle.setAttribute("cy", "12"); circle.setAttribute("r", "5");
+    sunSvg.appendChild(circle);
+    [[12,1,12,3],[12,21,12,23],[4.22,4.22,5.64,5.64],[18.36,18.36,19.78,19.78],[1,12,3,12],[21,12,23,12],[4.22,19.78,5.64,18.36],[18.36,5.64,19.78,4.22]].forEach(([x1,y1,x2,y2]) => {
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", x1); line.setAttribute("y1", y1);
+      line.setAttribute("x2", x2); line.setAttribute("y2", y2);
+      sunSvg.appendChild(line);
+    });
+
+    const moonSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    moonSvg.setAttribute("class", "theme-icon-moon");
+    moonSvg.setAttribute("width", "16");
+    moonSvg.setAttribute("height", "16");
+    moonSvg.setAttribute("viewBox", "0 0 24 24");
+    moonSvg.setAttribute("fill", "none");
+    moonSvg.setAttribute("stroke", "currentColor");
+    moonSvg.setAttribute("stroke-width", "2");
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z");
+    moonSvg.appendChild(path);
+
+    btn.appendChild(sunSvg);
+    btn.appendChild(moonSvg);
+
+    const header = document.querySelector(".site-header");
+    if (header) header.appendChild(btn);
+
+    btn.addEventListener("click", () => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      if (isDark) {
+        document.documentElement.removeAttribute("data-theme");
+        localStorage.setItem("3650-theme", "light");
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("3650-theme", "dark");
+      }
+    });
+  }
+
+  // === SMOOTH TRANSACTION ACCORDION ===
+  function initSmoothAccordion() {
+    document.querySelectorAll(".transaction-detail-panel").forEach((panel) => {
+      panel.style.setProperty("--panel-height", panel.scrollHeight + "px");
+    });
+  }
+
   initCursor();
   initScrollProgress();
   initScrollReveal();
@@ -837,4 +934,6 @@
   initCounters();
   initSmoothAnchors();
   initPressMarquee();
+  initThemeToggle();
+  initSmoothAccordion();
 })();
