@@ -29,6 +29,7 @@
       rel="stylesheet"
     />
     <link rel="icon" type="image/png" href="./assets/favicon-3650.png" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -320,7 +321,7 @@
               <p>Credit performance on par with Life Cos. Special servicer rating by all major agencies.</p>
             </article>
             <figure class="metric-photo">
-              <img src="./assets/media/us-portfolio-map.png" alt="3650 U.S. Portfolio Footprint showing RECS and SCF strategy properties nationwide" loading="lazy" />
+              <div id="deal-map" aria-label="3650 U.S. Portfolio Footprint showing transaction and office locations nationwide"></div>
             </figure>
           </div>
         </section>
@@ -467,6 +468,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="./motion.js"></script>
   </body>
 </html>
