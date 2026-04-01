@@ -744,6 +744,30 @@
       [40.74, -74.03, "Waterfront Corporate Center I", "$30.0M preferred equity \u2014 Hoboken, NJ"],
       [35.23, -80.84, "Transcoastal Portfolio", "$89.0M preferred equity \u2014 21 Sunbelt assets"],
       [25.94, -80.25, "Center at Miami Gardens", "$49.3M senior construction loan"],
+      [26.19, -80.11, "Bay Harbor Islands", "$74M construction loan"],
+      [34.05, -118.25, "LA Multifamily Community", "$36M bridge loan"],
+      [39.96, -82.99, "Columbus Warehouse", "$62M refinancing"],
+      [34.17, -118.60, "SoCal Projects", "$145M construction financing"],
+      [38.58, -121.49, "Creekside Town Center \u2014 Roseville", "$125.5M acquisition"],
+      [33.80, -117.91, "Radisson Blu \u2014 Anaheim", "$115M construction loan"],
+      [26.12, -80.14, "Fort Lauderdale Riverfront", "$32M development loan"],
+      [29.76, -95.37, "Houston Mixed-Use", "$31M construction loan"],
+      [34.93, -82.43, "Greenville, SC Offices", "$68.5M loan"],
+      [40.78, -74.19, "RH Bay Area HQ", "$29M acquisition loan"],
+      [39.74, -75.55, "Wilmington Office", "$85M refinancing"],
+      [32.96, -96.82, "Texas Hotel-Condo Tower", "$38M refinancing"],
+      [33.44, -86.79, "Alabama Apartments", "$50M construction loan"],
+      [42.34, -83.05, "Michigan Industrial", "Portfolio financing"],
+      [27.95, -82.46, "Tampa Bay Hospitality", "$57M refinancing"],
+      [31.97, -99.90, "Corpus Christi Multifamily", "$31M preferred equity"],
+      [26.27, -80.27, "South Florida Construction", "$77M construction loan"],
+      [40.74, -74.17, "Long Island Manufacturing", "Acquisition financing"],
+      [36.16, -86.78, "Nashville Portfolio", "Sunbelt investment"],
+      [33.75, -84.39, "Atlanta Multifamily", "Portfolio financing"],
+      [28.54, -81.38, "Orlando Portfolio", "Sunbelt investment"],
+      [35.47, -97.52, "Oklahoma City Industrial", "Portfolio financing"],
+      [39.10, -84.51, "Cincinnati Portfolio", "Midwest investment"],
+      [38.63, -90.20, "St. Louis Portfolio", "Midwest investment"],
     ].forEach(([lat, lng, name, detail]) => {
       L.marker([lat, lng], { icon: txIcon })
         .addTo(map)
@@ -756,6 +780,8 @@
       [34.07, -118.40, "Los Angeles", "9595 Wilshire Blvd, Suite 611"],
       [32.81, -96.81, "Dallas", "4143 Maple Ave, Suite 220"],
       [33.85, -84.37, "Atlanta", "3050 Peachtree Road NW, Suite 320"],
+      [36.16, -86.78, "Nashville", "Office opening soon"],
+      [38.91, -77.04, "Washington D.C.", "Office opening soon"],
     ].forEach(([lat, lng, city, address]) => {
       L.marker([lat, lng], { icon: officeIcon })
         .addTo(map)
@@ -971,10 +997,12 @@
   function initNewsCarousel() {
     const list = document.querySelector('.news-list');
     if (!list) return;
+    // Remove empty <p> and <br> injected by WP wpautop
+    list.querySelectorAll(':scope > p:empty, :scope > br').forEach(el => el.remove());
     const items = [...list.querySelectorAll('.news-item')];
-    if (items.length <= 4) return;
+    if (items.length <= 6) return;
 
-    const pageSize = 4;
+    const pageSize = 6;
     let page = 0;
     const totalPages = Math.ceil(items.length / pageSize);
 
