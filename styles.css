@@ -52,6 +52,7 @@ body {
   margin: 0;
   color: var(--ink);
   font-family: "Archivo", sans-serif;
+  text-wrap: pretty;
   background:
     linear-gradient(rgba(19, 19, 19, 0.007) 1px, transparent 1px),
     linear-gradient(90deg, rgba(19, 19, 19, 0.007) 1px, transparent 1px),
@@ -338,6 +339,10 @@ h3 {
   background: linear-gradient(135deg, rgba(238, 230, 215, 0.9), rgba(238, 230, 215, 0.72));
   border: 1px solid rgba(19, 19, 19, 0.18);
   overflow: visible;
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
 }
 
 h1 {
