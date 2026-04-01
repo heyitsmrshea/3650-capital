@@ -474,7 +474,7 @@ h1 span {
 .hero-rail {
   margin-top: 0;
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   background: linear-gradient(180deg, rgba(238, 230, 215, 0.86), rgba(238, 230, 215, 0.64));
   border: 1px solid var(--line-strong);
   border-top: 0;
@@ -2040,6 +2040,12 @@ body.video-modal-open {
   grid-column: 2;
   grid-row: 1 / span 3;
   border: none;
+  background: #1a2332;
+}
+
+.portfolio-footprint .metric-photo img {
+  object-fit: contain;
+  object-position: center center;
 }
 
 .metrics-grid-wide {
@@ -3313,7 +3319,7 @@ body.video-modal-open {
 }
 
 .statement-lead::before {
-  content: "36";
+  content: "3650";
   position: absolute;
   right: 14px;
   bottom: -18px;

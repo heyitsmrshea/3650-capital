@@ -927,24 +927,7 @@
     });
   }
 
-  // === SECTION HEADING SPLIT-LINE REVEAL ===
-  function initHeadingReveals() {
-    const headings = document.querySelectorAll('.section-stack-head h2, .news-head h2, .proof-head h2, .statement-lead h2, .name-origin-lead h2');
-    headings.forEach(h => {
-      h.style.clipPath = 'inset(0 100% 0 0)';
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          entry.target.animate(
-            [{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)' }],
-            { duration: 900, easing, fill: 'both', delay: 100 }
-          );
-          obs.unobserve(entry.target);
-        });
-      }, { threshold: 0.3 });
-      obs.observe(h);
-    });
-  }
+  // Heading reveals handled by initScrollReveal — no separate animation needed
 
   // === HERO KICKER TYPEWRITER ===
   function initKickerTypewriter() {
@@ -1051,7 +1034,6 @@
   initPressMarquee();
   initThemeToggle();
   initSmoothAccordion();
-  initHeadingReveals();
   initKickerTypewriter();
   initSectionParallax();
   initNewsCarousel();
