@@ -2000,8 +2000,8 @@ body.video-modal-open {
 }
 
 .portfolio-footprint .metric-photo img {
-  object-position: 62% center;
-  transform: scale(1.14);
+  object-position: center top;
+  clip-path: inset(0 0 0 2%);
 }
 
 .metrics-grid-wide {
