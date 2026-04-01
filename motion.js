@@ -780,8 +780,8 @@
       [34.07, -118.40, "Los Angeles", "9595 Wilshire Blvd, Suite 611"],
       [32.81, -96.81, "Dallas", "4143 Maple Ave, Suite 220"],
       [33.85, -84.37, "Atlanta", "3050 Peachtree Road NW, Suite 320"],
-      [36.16, -86.78, "Nashville", "Office opening soon"],
-      [38.91, -77.04, "Washington D.C.", "Office opening soon"],
+      [36.16, -86.78, "Nashville", "Nashville, Tennessee"],
+      [38.91, -77.04, "Washington D.C.", "Washington D.C. Area"],
     ].forEach(([lat, lng, city, address]) => {
       L.marker([lat, lng], { icon: officeIcon })
         .addTo(map)
