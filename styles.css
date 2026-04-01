@@ -1997,11 +1997,11 @@ body.video-modal-open {
   grid-column: 2;
   grid-row: 1 / span 3;
   border: none;
+  background: #1a2332;
 }
 
 .portfolio-footprint .metric-photo img {
   object-position: center top;
-  clip-path: inset(0 0 0 2%);
 }
 
 .metrics-grid-wide {
